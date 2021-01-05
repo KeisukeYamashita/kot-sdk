@@ -3,11 +3,11 @@ import {Employee} from './employee'
 
 export interface KotOptions {
     token: string
-    timeout: number
-    baseUrl: string
+    timeout?: number
+    baseUrl?: string
 }
 
-export default class Kot {
+export class Kot {
     employee: Employee
 
     static baseUrl: string = 'https://api.kingtime.jp/v1.0'
