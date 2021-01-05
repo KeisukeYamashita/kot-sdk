@@ -12,7 +12,7 @@ export class APIError extends Error {
         this.message = `${err.name}:${err.message}`
 
         if (err.response) {
-            err.response.data.errors.forEach(error => {this.message += `Error:${error.message}`})
+            err.response.data.errors.forEach(error => {this.message += ` Error:${error.message}`})
             this.status = err.response.status
             this.url = err.response.config.url
         }
