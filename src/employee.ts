@@ -6,12 +6,23 @@ export class Employee {
 
     async get(req: API.EmployeeAPI.GetRequest): Promise<API.EmployeeAPI.GetResponse> {
         const {date,includeResigner, additionalFields} = req
-        return (await this.httpClient.post(`/employees/${req.employeeCode}`, null, {
+        return (await this.httpClient.get(`/employees/${req.employeeCode}`, {
             params: {
                 additionalFields,
                 date,
                 includeResigner
             }
         })).data as API.EmployeeAPI.GetResponse
+    }
+
+    async list(req: API.EmployeeAPI.ListRequest): Promise<API.EmployeeAPI.ListResponse> {
+        const {date,includeResigner, additionalFields} = req
+        return (await this.httpClient.get(`/employees`, {
+            params: {
+                additionalFields,
+                date,
+                includeResigner
+            }
+        })).data as API.EmployeeAPI.ListResponse
     }
 }

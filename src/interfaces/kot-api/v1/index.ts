@@ -20,7 +20,7 @@ export namespace API {
         }
         export type GetResponse = Employee
 
-        export type ListRequest = GetRequest
+        export type ListRequest = Omit<GetRequest, 'employeeCode'>
         export type ListResponse = Employee[]
     }
 }
