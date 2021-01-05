@@ -26,7 +26,7 @@ import Kot from 'kot-sdk'
 const client = new Kot({token: 'YOUR_ACCESS_TOKEN'})
 
 (async () => {
-    const employee = await client.employee.get(100)
+    const employee = await client.employee.get({employeeCode: 100})
 })()
 ```
 
