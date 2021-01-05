@@ -1,13 +1,6 @@
 export namespace API {
-    export namespace Employee {
-        export interface GetRequest {
-            employeeCode: string
-            date?: string
-            includeResigner?: boolean
-            additionalFields?: 'emailAddresses'
-        }
-        
-        export interface GetResponse {
+    export namespace EmployeeAPI {
+        export interface Employee {
             divisionCode: number
             divisionName: string
             gender: string
@@ -18,6 +11,16 @@ export namespace API {
             firstname: string
             key: string
             [additionalKeys: string]: any
-        }        
+        }
+        export interface GetRequest {
+            employeeCode: string
+            date?: string
+            includeResigner?: boolean
+            additionalFields?: 'emailAddresses'
+        }
+        export type GetResponse = Employee
+
+        export type ListRequest = GetRequest
+        export type ListResponse = Employee[]
     }
 }
