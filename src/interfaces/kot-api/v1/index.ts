@@ -1,3 +1,4 @@
+export {APIError} from './errors/APIError'
 export namespace API {
     export namespace EmployeeAPI {
         export interface Employee {
