@@ -4,7 +4,7 @@ import {API} from './interfaces'
 export class Employee {
     constructor(private httpClient:AxiosInstance){}
 
-    async get(req: API.Employee.GetRequest): Promise<API.Employee.GetRequest> {
+    async get(req: API.Employee.GetRequest): Promise<API.Employee.GetResponse> {
         const {date,includeResigner, additionalFields} = req
         return (await this.httpClient.post(`/employees/${req.employeeCode}`, null, {
             params: {
@@ -12,6 +12,6 @@ export class Employee {
                 date,
                 includeResigner
             }
-        })).data as API.Employee.GetRequest
+        })).data as API.Employee.GetResponse
     }
 }
