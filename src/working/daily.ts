@@ -1,7 +1,6 @@
 import { AxiosInstance } from 'axios'
 import { HttpClient } from '../httpClient'
 import {API} from '../interfaces'
-import util from '../util'
 
 /**
  * Service that handles the Working Daily web API.
@@ -32,7 +31,7 @@ export class Daily extends HttpClient {
         return (await this.createRequest<API.WorkingAPI.Daily.RecordRequest, API.WorkingAPI.Daily.RecordResponse>(
             'post', 
             `/daily-working/timerecord/${req.employeeKey}`, 
-            req, 
+            req as API.WorkingAPI.Daily.RecordRequest, 
             null)
         )
     }
