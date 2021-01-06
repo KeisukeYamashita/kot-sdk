@@ -30,7 +30,7 @@ jobs:
       run:  npm install
     - name: Run test
       run: npm test
-    - name: Run build
+    - name: Run run build
       run: npm build
     - name: NPM Publish
       run: npm publish
