@@ -1,5 +1,6 @@
 import axios from 'axios'
 import {Employee} from './employee'
+import { Working } from './working/working'
 
 export interface KotOptions {
     token: string
@@ -12,6 +13,7 @@ export interface KotOptions {
  */
 export class Kot {
     employee: Employee
+    working: Working
 
     static baseUrl: string = 'https://api.kingtime.jp/v1.0'
     static timeout: number = 1000
@@ -29,5 +31,6 @@ export class Kot {
         })
 
         this.employee = new Employee(httpClient)
+        this.working = new Working(httpClient)
     }
 }
