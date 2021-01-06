@@ -38,11 +38,13 @@ export namespace API {
 
     export namespace WorkingAPI {
         export namespace Daily {
-            export interface Record extends RecordRequest {
+            export type Record = RecordRequest & {
                 employeeKey: string
             }
 
-            export interface RecordRequest {
+            export type RecordRequest = RecordRequestWithCredentialCode | RecordRequestWithCode
+
+            export interface RecordRequestWithCredentialCode {
                 date: string
                 time: string
                 divisionCode: string
@@ -50,6 +52,13 @@ export namespace API {
                 credentialName?: string
                 latitude?: number
                 longtitude?: number
+            }
+
+            export interface RecordRequestWithCode {
+                date: string
+                time: string
+                code: number
+                divisionCode: string
             }
 
             export type RecordResponse = RecordRequest
