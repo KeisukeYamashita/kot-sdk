@@ -7,6 +7,9 @@ export interface KotOptions {
     baseUrl?: string
 }
 
+/**
+ * Client for KING OF TIME web API.
+ */
 export class Kot {
     employee: Employee
 

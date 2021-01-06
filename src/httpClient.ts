@@ -6,7 +6,7 @@ import { ErrorResponse } from "./interfaces/kot-api/v1/errors/response";
 export class HttpClient {
     constructor(protected httpClient: AxiosInstance) {}
 
-    protected async createRequest<T, K> (method: any, url: string, data?: T, params?: any): Promise<K> {
+    protected async createRequest<T = Record<string, any>, K = Record<string, any>> (method: any, url: string, data?: T, params?: any): Promise<K> {
         try{
             return (await this.httpClient.request({
                 method,
