@@ -1,6 +1,7 @@
 import { AxiosInstance } from 'axios'
 import { HttpClient } from './httpClient'
 import {API} from './interfaces'
+import util from './util'
 
 export class Employee extends HttpClient {
     constructor(httpClient:AxiosInstance){
@@ -8,12 +9,14 @@ export class Employee extends HttpClient {
     }
 
     async get(req: API.EmployeeAPI.GetRequest): Promise<API.EmployeeAPI.GetResponse> {
-        const {date,includeResigner, additionalFields} = req
+        const {employeeCode, date,includeResigner, additionalFields} = req
+        const formatEmployeeCode = util.padEmployeeCode(employeeCode)
+
         return (await this.createRequest<API.EmployeeAPI.GetRequest, API.EmployeeAPI.GetResponse>(
             'get', 
-            `/employees/${req.employeeCode}`, 
+            `/employees/${formatEmployeeCode}`, 
             undefined, 
-            {date, includeResigner, additionalFields}
+            {date, includeResigner, additionalFields: additionalFields?.join(',')}
         ))
     }
 

@@ -15,10 +15,10 @@ export namespace API {
         }
 
         export interface GetRequest {
-            employeeCode: number
+            employeeCode: number | string
             date?: string
             includeResigner?: boolean
-            additionalFields?: 'emailAddresses'
+            additionalFields?: 'emailAddresses'[]
         }
 
         export type GetResponse = Employee
