@@ -20,6 +20,7 @@ export namespace API {
             lastname: string
             firstname: string
             key: string
+            emailAddresses?: string[]
             [additionalKeys: string]: any
         }
 
