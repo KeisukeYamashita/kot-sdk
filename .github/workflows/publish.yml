@@ -30,8 +30,8 @@ jobs:
       run:  npm install
     - name: Run test
       run: npm test
-    - name: Run run build
-      run: npm build
+    - name: Run build
+      run: npm run build
     - name: NPM Publish
       run: npm publish
       env:
