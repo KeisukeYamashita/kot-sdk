@@ -5,29 +5,6 @@ on:
       - "v[0-9]+.[0-9].[0-9]+"
 
 jobs:
-  test:
-    name: test
-    runs-on: ubuntu-latest
-    steps:
-    - name: Checkout repository
-      uses: actions/checkout@v2
-    - name: Set up Node.js
-      uses: actions/setup-node@v2
-    - name: Cache node modules
-      uses: actions/cache@v2
-      env:
-        cache-name: cache-node-modules
-      with:
-        path: ~/.npm
-        key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
-        restore-keys: |
-          ${{ runner.os }}-build-${{ env.cache-name }}-
-          ${{ runner.os }}-build-
-          ${{ runner.os }}-
-    - name: NPM install
-      run:  npm install
-    - name: Run test
-      run: npm test
   publish:
     name: publish
     needs: test
@@ -52,6 +29,8 @@ jobs:
           ${{ runner.os }}-
     - name: NPM install
       run:  npm install
+    - name: Run test
+      run: npm test
     - name: NPM Publish
       run: npm publish
       env:
