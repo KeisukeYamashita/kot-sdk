@@ -1,6 +1,6 @@
 {
   "name": "kot-sdk",
-  "version": "0.1.15",
+  "version": "0.1.16",
   "description": "Node.js SDK for King of Time Web API ",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",

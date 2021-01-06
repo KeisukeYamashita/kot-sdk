@@ -1,5 +1,14 @@
 export {APIError} from './errors/APIError'
 export namespace API {
+
+    export type EmployeeAdditionalFields = 'lastNamePhonetics' 
+    | 'firstNamePhonetics' 
+    | 'hiredDate' 
+    | 'birthDate'
+    | 'resignationDate'
+    | 'emailAddresses'
+    | 'allDayRegardingWorkInMinute'
+
     export namespace EmployeeAPI {
         export interface Employee {
             divisionCode: number
@@ -18,7 +27,7 @@ export namespace API {
             employeeCode: number | string
             date?: string
             includeResigner?: boolean
-            additionalFields?: 'emailAddresses'[]
+            additionalFields?:  EmployeeAdditionalFields[]
         }
 
         export type GetResponse = Employee
