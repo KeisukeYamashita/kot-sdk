@@ -30,7 +30,7 @@ export class Daily extends HttpClient {
     async record(req: API.WorkingAPI.Daily.Record): Promise<API.WorkingAPI.Daily.RecordResponse> {
         return (await this.createRequest<API.WorkingAPI.Daily.RecordRequest, API.WorkingAPI.Daily.RecordResponse>(
             'post', 
-            `/daily-working/timerecord/${req.employeeKey}`, 
+            `/daily-workings/timerecord/${req.employeeKey}`, 
             req as API.WorkingAPI.Daily.RecordRequest, 
             null)
         )
