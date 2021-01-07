@@ -11,6 +11,27 @@
 
 You can find the official web api spec [here](https://developer.kingtime.jp/).
 
+## Supported Features
+
+These are the list of supported features.
+
+* [ ] Token service
+* [ ] Company
+* [ ] Admin
+* [ ] Employee
+    * [x] Get
+* [ ] Working
+    * [ ] Daily
+        * [ ] Record 
+            * [x] Post record
+        * [ ] Schedule
+    * [ ] Monthly
+        * [ ] Record
+        * [ ] Schedule
+    * [ ] Yearly
+
+Please help me!
+
 ## Install
 
 You can install this SDK by `npm`:
