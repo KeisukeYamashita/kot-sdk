@@ -1,8 +1,8 @@
 export interface ErrorResponse {
-    errors: KotError[]
+  errors: KotError[]
 }
 
 export interface KotError {
-    message: string
-    code: number
+  message: string
+  code: number
 }

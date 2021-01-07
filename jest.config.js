@@ -3,4 +3,6 @@ module.exports = {
   transform: {
     '^.+\\.tsx?$': 'ts-jest',
   },
+  coverageDirectory: "./coverage/",
+  collectCoverage: true
 }
