@@ -6,6 +6,7 @@
 ![Test](https://github.com/KeisukeYamashita/kot-sdk/workflows/Test/badge.svg)
 ![Publish](https://github.com/KeisukeYamashita/kot-sdk/workflows/Publish/badge.svg)
 [![License](https://img.shields.io/badge/License-BSD%203--Clause-blue.svg)](https://opensource.org/licenses/BSD-3-Clause)
+[![codecov](https://codecov.io/gh/KeisukeYamashita/kot-sdk/branch/master/graph/badge.svg)](https://codecov.io/gh/KeisukeYamashita/kot-sdk)
 
 > Unofficial Node.js API client for [King of Time](https://www.kingtime.jp/) Web API.
 
