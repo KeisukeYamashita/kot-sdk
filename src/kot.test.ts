@@ -1,4 +1,4 @@
-import { Kot } from './Kot'
+import { Kot } from './kot'
 import nock from 'nock'
 import axios from 'axios'
 import { API } from './interfaces'
