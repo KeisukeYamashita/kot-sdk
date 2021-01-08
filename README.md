@@ -1,12 +1,14 @@
 # King of Time (KOT) SDK
 
+[![npm version](https://badge.fury.io/js/kot-sdk.svg)](https://badge.fury.io/js/kot-sdk)
 [![](https://img.shields.io/badge/-Javascript-F7DF1E?style=flat-square&logoColor=white&logo=javascript)](https://github.com/KeisukeYamashita/kot-sdk)
 [![](https://img.shields.io/badge/-Typescript-007ACC?style=flat-square&logoColor=white&logo=typescript)](https://github.com/KeisukeYamashita/kot-sdk)
-[![npm version](https://badge.fury.io/js/kot-sdk.svg)](https://badge.fury.io/js/kot-sdk)
+
 ![Test](https://github.com/KeisukeYamashita/kot-sdk/workflows/Test/badge.svg)
 ![Publish](https://github.com/KeisukeYamashita/kot-sdk/workflows/Publish/badge.svg)
-[![License](https://img.shields.io/badge/License-BSD%203--Clause-blue.svg)](https://opensource.org/licenses/BSD-3-Clause)
 [![codecov](https://codecov.io/gh/KeisukeYamashita/kot-sdk/branch/master/graph/badge.svg)](https://codecov.io/gh/KeisukeYamashita/kot-sdk)
+[![dependency](https://status.david-dm.org/gh/KeisukeYamashita/kot-sdk.svg)](https://github.com/KeisukeYamashita/kot-sdk/network/dependencies)
+[![License](https://img.shields.io/badge/License-BSD%203--Clause-blue.svg)](https://opensource.org/licenses/BSD-3-Clause)
 
 > Unofficial Node.js API client for [King of Time](https://www.kingtime.jp/) Web API.
 
