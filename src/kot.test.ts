@@ -10,6 +10,36 @@ const token = 'xxxyyyzzz'
 const employeeCode = '1000'
 
 describe('Kot', () => {
+  describe('constructor()', () => {
+    test('should not timeout', async () => {
+      nock(Kot.baseUrl)
+        .get(`/employees/0${employeeCode}`)
+        .delay(2000)
+        .reply(200, {
+          divisionCode: 10,
+          divisionName: 'Engineer',
+          code: '1010',
+        } as API.EmployeeAPI.GetResponse)
+
+      const kot = new Kot({ token, timeout: 3000 })
+      await expect(kot.employee.get({ employeeCode })).resolves.not.toThrow()
+    })
+
+    test('should timeout', async () => {
+      nock(Kot.baseUrl)
+        .get(`/employees/0${employeeCode}`)
+        .delay(2000)
+        .reply(200, {
+          divisionCode: 10,
+          divisionName: 'Engineer',
+          code: '1010',
+        } as API.EmployeeAPI.GetResponse)
+
+      const kot = new Kot({ token })
+      await expect(kot.employee.get({ employeeCode })).rejects.toThrow('Error:timeout of 1000ms exceeded')
+    })
+  })
+
   describe('Employee', () => {
     describe('get()', () => {
       test('should return results', async () => {
@@ -32,13 +62,13 @@ describe('Kot', () => {
         nock(Kot.baseUrl)
           .get(`/employees/0${employeeCode}`)
           .query({
-            additionalFields: 'emailAddresses'
+            additionalFields: 'emailAddresses',
           })
           .reply(200, {
             divisionCode: 10,
             divisionName: 'Engineer',
             code: '1010',
-            emailAddresses: ['keke@keke.com']
+            emailAddresses: ['keke@keke.com'],
           } as API.EmployeeAPI.GetResponse)
 
         const kot = new Kot({ token })
@@ -51,29 +81,28 @@ describe('Kot', () => {
       test('return errors', async () => {
         const kotErr: KotError = {
           message: 'employee not found',
-          code: 100
+          code: 100,
         }
 
         nock(Kot.baseUrl)
           .get(`/employees/0${employeeCode}`)
           .reply(400, {
-            errors: [
-            kotErr
-          ]} as ErrorResponse)
+            errors: [kotErr],
+          } as ErrorResponse)
 
-          const kot = new Kot({ token })
-          try {
-            const employee = await kot.employee.get({ employeeCode })
-          } catch (err) {
-            if (err instanceof APIError) {
-              expect(err.url).toBe(`/employees/0${employeeCode}`)
-              expect(err.name).toBe('APIError')
-              expect(err.message).toBe('Error:Request failed with status code 400 Error:employee not found')
-              expect(err.errors).not.toBeUndefined()
-              expect(err.errors?.length).toBe(1)
-              expect(err.errors![0]).toEqual(kotErr)
-            }
+        const kot = new Kot({ token })
+        try {
+          const employee = await kot.employee.get({ employeeCode })
+        } catch (err) {
+          if (err instanceof APIError) {
+            expect(err.url).toBe(`/employees/0${employeeCode}`)
+            expect(err.name).toBe('APIError')
+            expect(err.message).toBe('Error:Request failed with status code 400 Error:employee not found')
+            expect(err.errors).not.toBeUndefined()
+            expect(err.errors?.length).toBe(1)
+            expect(err.errors![0]).toEqual(kotErr)
           }
+        }
       })
     })
 
