@@ -20,6 +20,7 @@ These are the list of supported features.
 * [ ] Admin
 * [ ] Employee
     * [x] Get
+    * [x] List
 * [ ] Working
     * [ ] Daily
         * [ ] Record 
