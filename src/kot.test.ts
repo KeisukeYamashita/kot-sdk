@@ -28,6 +28,26 @@ describe('Kot', () => {
         expect(employee.divisionCode).toBe(10)
       })
 
+      test('should return addissional fields', async () => {
+        nock(Kot.baseUrl)
+          .get(`/employees/0${employeeCode}`)
+          .query({
+            additionalFields: 'emailAddresses'
+          })
+          .reply(200, {
+            divisionCode: 10,
+            divisionName: 'Engineer',
+            code: '1010',
+            emailAddresses: ['keke@keke.com']
+          } as API.EmployeeAPI.GetResponse)
+
+        const kot = new Kot({ token })
+        const employee = await kot.employee.get({ employeeCode, additionalFields: ['emailAddresses'] })
+        expect(employee.emailAddresses).not.toBeUndefined()
+        expect(employee.emailAddresses?.length).toBe(1)
+        expect(employee.emailAddresses![0]).toBe('keke@keke.com')
+      })
+
       test('return errors', async () => {
         const kotErr: KotError = {
           message: 'employee not found',
