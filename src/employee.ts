@@ -52,12 +52,9 @@ export class Employee extends HttpClient {
    * @throws {@link APIError}
    * This exception is throw if the request to KING OF TIME web API fails.
    */
-  async list(req: API.EmployeeAPI.ListRequest): Promise<API.EmployeeAPI.ListResponse> {
-    const { date, includeResigner, additionalFields } = req
+  async list(req?: API.EmployeeAPI.ListRequest): Promise<API.EmployeeAPI.ListResponse> {
     return await this.createRequest<API.EmployeeAPI.ListRequest, API.EmployeeAPI.ListResponse>('get', `/employees`, undefined, {
-      date,
-      includeResigner,
-      additionalFields,
+      ...req,
     })
   }
 }
