@@ -1,8 +1,9 @@
 import { Kot } from './kot'
 import nock from 'nock'
 import axios from 'axios'
-import { API } from './interfaces'
+import { API, APIError } from './interfaces'
 import httpAdapter from 'axios/lib/adapters/http'
+import { ErrorResponse, KotError } from './interfaces/kot-api/v1/errors/response'
 axios.defaults.adapter = httpAdapter
 
 const token = 'xxxyyyzzz'
@@ -25,6 +26,34 @@ describe('Kot', () => {
         expect(employee.code).toBe('1010')
         expect(employee.divisionName).toBe('Engineer')
         expect(employee.divisionCode).toBe(10)
+      })
+
+      test('return errors', async () => {
+        const kotErr: KotError = {
+          message: 'employee not found',
+          code: 100
+        }
+
+        nock(Kot.baseUrl)
+          .get(`/employees/0${employeeCode}`)
+          .reply(400, {
+            errors: [
+            kotErr
+          ]} as ErrorResponse)
+
+          const kot = new Kot({ token })
+          try {
+            const employee = await kot.employee.get({ employeeCode })
+          } catch (err) {
+            if (err instanceof APIError) {
+              expect(err.url).toBe(`/employees/0${employeeCode}`)
+              expect(err.name).toBe('APIError')
+              expect(err.message).toBe('Error:Request failed with status code 400 Error:employee not found')
+              expect(err.errors).not.toBeUndefined()
+              expect(err.errors?.length).toBe(1)
+              expect(err.errors![0]).toEqual(kotErr)
+            }
+          }
       })
     })
 
