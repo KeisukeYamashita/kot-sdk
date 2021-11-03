@@ -108,20 +108,28 @@ describe('Kot', () => {
     })
 
     describe('setBaseUrl', () => {
-      const url = 'https://local.host'
-      const kot = new Kot({ token }).setBaseUrl(url)
-      expect(kot.baseUrl()).toBe(url)
+      test('base url is updated', () => {
+        const url = 'https://local.host'
+        const kot = new Kot({ token, baseUrl: url }).setBaseUrl(url)
+        expect(kot.baseUrl()).toBe(url)
+      })
+
+      test('other headers are not modified', () => {
+        const url = 'https://local.host'
+        const kot = new Kot({ token, baseUrl: url }).setBaseUrl(url)
+        expect(kot.timeout()).toBe(1000)
+      })
     })
 
     describe('setTimeout', () => {
       const timeout = 100
-      const kot = new Kot({ token }).setTimeout(100)
+      const kot = new Kot({ token, timeout }).setTimeout(100)
       expect(kot.timeout()).toBe(timeout)
     })
 
     describe('setUserAgent', () => {
       const ua = 'KOT SDK/test'
-      const kot = new Kot({ token }).setUserAgent(ua)
+      const kot = new Kot({ token, userAgent: ua }).setUserAgent(ua)
       expect(kot.userAgent()).toBe(ua)
     })
 
