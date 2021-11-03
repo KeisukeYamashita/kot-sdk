@@ -62,18 +62,6 @@ export class Kot {
     return this
   }
 
-  private configureHTTPClient(config: AxiosRequestConfig): AxiosInstance {
-    const httpClient = axios.create(config)
-    return httpClient
-  }
-
-  private configureClients(config: AxiosRequestConfig): void {
-    const httpClient = axios.create(config)
-
-    this.employee = new Employee(httpClient)
-    this.working = new Working(httpClient)
-  }
-
   setBaseUrl(baseURL: string): Kot {
     this._baseUrl = baseURL
 
@@ -99,5 +87,17 @@ export class Kot {
 
     this.configureClients(config)
     return this
+  }
+
+  private configureHTTPClient(config: AxiosRequestConfig): AxiosInstance {
+    const httpClient = axios.create(config)
+    return httpClient
+  }
+
+  private configureClients(config: AxiosRequestConfig): void {
+    const httpClient = axios.create(config)
+
+    this.employee = new Employee(httpClient)
+    this.working = new Working(httpClient)
   }
 }
