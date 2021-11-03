@@ -94,16 +94,6 @@ Configure each configuration by the `Kot` classes' method `setXXX`:
 const client = new Kot().setTimeout(10000)
 ```
 
-#### 3. Static properties
-
-Note that these configurations affect all `Kot` class instances.
-
-```typescript
-Kot.timeout = 10000
-
-const client = new Kot()
-```
-
 ## Author
 
 * [KeisukeYamashita](https://github.com/KeisukeYamashita)

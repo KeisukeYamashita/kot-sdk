@@ -15,18 +15,18 @@ export class Kot {
   employee: Employee
   working: Working
 
-  static baseUrl = 'https://api.kingtime.jp/v1.0'
-  static timeout = 1000
-  static userAgent = 'KOT SDK/0.1.0'
+  private _baseUrl = 'https://api.kingtime.jp/v1.0'
+  private _timeout = 1000
+  private _userAgent = 'KOT SDK/0.1.0'
 
   constructor(options: KotOptions) {
     const httpClient = axios.create({
-      baseURL: options.baseUrl ?? Kot.baseUrl,
-      timeout: options.timeout ?? Kot.timeout,
+      baseURL: options.baseUrl ?? this._baseUrl,
+      timeout: options.timeout ?? this._timeout,
       headers: {
-        'User-Agent': Kot.userAgent,
-        'Content-Type': 'application/json; charset=utf-8',
         Authorization: `Bearer ${options.token}`,
+        'Content-Type': 'application/json; charset=utf-8',
+        'User-Agent': this._userAgent,
       },
     })
 
@@ -34,18 +34,30 @@ export class Kot {
     this.working = new Working(httpClient)
   }
 
+  baseUrl(): string {
+    return this._baseUrl
+  }
+
+  timeout(): number {
+    return this._timeout
+  }
+
+  userAgent(): string {
+    return this._userAgent
+  }
+
   setTimeout(timeout: number): Kot {
-    Kot.timeout = timeout
+    this._timeout = timeout
     return this
   }
 
   setBaseUrl(url: string): Kot {
-    Kot.baseUrl = url
+    this._baseUrl = url
     return this
   }
 
   setUserAgent(ua: string): Kot {
-    Kot.baseUrl = ua
+    this._baseUrl = ua
     return this
   }
 }
