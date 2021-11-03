@@ -33,4 +33,19 @@ export class Kot {
     this.employee = new Employee(httpClient)
     this.working = new Working(httpClient)
   }
+
+  setTimeout(timeout: number): Kot {
+    Kot.timeout = timeout
+    return this
+  }
+
+  setBaseUrl(url: string): Kot {
+    Kot.baseUrl = url
+    return this
+  }
+
+  setUserAgent(ua: string): Kot {
+    Kot.baseUrl = ua
+    return this
+  }
 }
