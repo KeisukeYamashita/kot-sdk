@@ -58,7 +58,7 @@ export class Kot {
       timeout,
     }
 
-    this.configureHTTPClient(config)
+    this.configureClients(config)
     return this
   }
 
@@ -82,7 +82,7 @@ export class Kot {
       baseURL,
     }
 
-    this.configureHTTPClient(config)
+    this.configureClients(config)
     return this
   }
 
@@ -97,7 +97,7 @@ export class Kot {
       },
     }
 
-    this.configureHTTPClient(config)
+    this.configureClients(config)
     return this
   }
 }
