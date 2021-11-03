@@ -1,4 +1,4 @@
-import axios from 'axios'
+import axios, { AxiosInstance, AxiosRequestConfig } from 'axios'
 import { Employee } from './employee'
 import { Working } from './working/working'
 
@@ -6,6 +6,7 @@ export interface KotOptions {
   token: string
   timeout?: number
   baseUrl?: string
+  userAgent?: string
 }
 
 /**
@@ -15,22 +16,88 @@ export class Kot {
   employee: Employee
   working: Working
 
-  static baseUrl = 'https://api.kingtime.jp/v1.0'
-  static timeout = 1000
-  static userAgent = 'KOT SDK/0.1.0'
+  private _baseUrl = 'https://api.kingtime.jp/v1.0'
+  private _timeout = 1000
+  private _userAgent = 'KOT SDK/0.1.0'
+
+  private config: AxiosRequestConfig
 
   constructor(options: KotOptions) {
-    const httpClient = axios.create({
-      baseURL: options.baseUrl ?? Kot.baseUrl,
-      timeout: options.timeout ?? Kot.timeout,
+    this.config = {
+      baseURL: options.baseUrl ?? this._baseUrl,
+      timeout: options.timeout ?? this._timeout,
       headers: {
-        'User-Agent': Kot.userAgent,
-        'Content-Type': 'application/json; charset=utf-8',
         Authorization: `Bearer ${options.token}`,
+        'Content-Type': 'application/json; charset=utf-8',
+        'User-Agent': options.userAgent ?? this._userAgent,
       },
-    })
+    }
+
+    const httpClient = this.configureHTTPClient(this.config)
+    this.employee = new Employee(httpClient)
+    this.working = new Working(httpClient)
+  }
+
+  baseUrl(): string {
+    return this._baseUrl
+  }
+
+  timeout(): number {
+    return this._timeout
+  }
+
+  userAgent(): string {
+    return this._userAgent
+  }
+
+  setTimeout(timeout: number): Kot {
+    this._timeout = timeout
+
+    const config: AxiosRequestConfig = {
+      ...this.config,
+      timeout,
+    }
+
+    this.configureHTTPClient(config)
+    return this
+  }
+
+  private configureHTTPClient(config: AxiosRequestConfig): AxiosInstance {
+    const httpClient = axios.create(config)
+    return httpClient
+  }
+
+  private configureClients(config: AxiosRequestConfig): void {
+    const httpClient = axios.create(config)
 
     this.employee = new Employee(httpClient)
     this.working = new Working(httpClient)
+  }
+
+  setBaseUrl(baseURL: string): Kot {
+    this._baseUrl = baseURL
+
+    const config: AxiosRequestConfig = {
+      ...this.config,
+      baseURL,
+    }
+
+    this.configureHTTPClient(config)
+    return this
+  }
+
+  setUserAgent(userAgent: string): Kot {
+    this._userAgent = userAgent
+
+    const config: AxiosRequestConfig = {
+      ...this.config,
+      headers: {
+        ...this.config.headers,
+        'User-Agent': userAgent,
+      },
+    }
+
+    this.configureHTTPClient(config)
+    return this
   }
 }

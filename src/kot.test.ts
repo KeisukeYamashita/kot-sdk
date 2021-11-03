@@ -7,12 +7,13 @@ import { ErrorResponse, KotError } from './interfaces/kot-api/v1/errors/response
 axios.defaults.adapter = httpAdapter
 
 const token = 'xxxyyyzzz'
+const baseUrl = 'https://api.kingtime.jp/v1.0'
 const employeeCode = '1000'
 
 describe('Kot', () => {
   describe('constructor()', () => {
-    test('should not timeout', async () => {
-      nock(Kot.baseUrl)
+    test('should not tiemeout', async () => {
+      nock(baseUrl)
         .get(`/employees/0${employeeCode}`)
         .delay(2000)
         .reply(200, {
@@ -25,8 +26,8 @@ describe('Kot', () => {
       await expect(kot.employee.get({ employeeCode })).resolves.not.toThrow()
     })
 
-    test('should timeout', async () => {
-      nock(Kot.baseUrl)
+    test('should timeouet', async () => {
+      nock(baseUrl)
         .get(`/employees/0${employeeCode}`)
         .delay(2000)
         .reply(200, {
@@ -43,7 +44,7 @@ describe('Kot', () => {
   describe('Employee', () => {
     describe('get()', () => {
       test('should return results', async () => {
-        nock(Kot.baseUrl)
+        nock(baseUrl)
           .get(`/employees/0${employeeCode}`)
           .reply(200, {
             divisionCode: 10,
@@ -59,7 +60,7 @@ describe('Kot', () => {
       })
 
       test('should return addissional fields', async () => {
-        nock(Kot.baseUrl)
+        nock(baseUrl)
           .get(`/employees/0${employeeCode}`)
           .query({
             additionalFields: 'emailAddresses',
@@ -84,7 +85,7 @@ describe('Kot', () => {
           code: 100,
         }
 
-        nock(Kot.baseUrl)
+        nock(baseUrl)
           .get(`/employees/0${employeeCode}`)
           .reply(400, {
             errors: [kotErr],
@@ -106,9 +107,35 @@ describe('Kot', () => {
       })
     })
 
+    describe('setBaseUrl', () => {
+      test('base url is updated', () => {
+        const url = 'https://local.host'
+        const kot = new Kot({ token, baseUrl: url }).setBaseUrl(url)
+        expect(kot.baseUrl()).toBe(url)
+      })
+
+      test('other headers are not modified', () => {
+        const url = 'https://local.host'
+        const kot = new Kot({ token, baseUrl: url }).setBaseUrl(url)
+        expect(kot.timeout()).toBe(1000)
+      })
+    })
+
+    describe('setTimeout', () => {
+      const timeout = 100
+      const kot = new Kot({ token, timeout }).setTimeout(100)
+      expect(kot.timeout()).toBe(timeout)
+    })
+
+    describe('setUserAgent', () => {
+      const ua = 'KOT SDK/test'
+      const kot = new Kot({ token, userAgent: ua }).setUserAgent(ua)
+      expect(kot.userAgent()).toBe(ua)
+    })
+
     describe('list()', () => {
       test('should return results', async () => {
-        nock(Kot.baseUrl)
+        nock(baseUrl)
           .get(`/employees`)
           .reply(200, [
             {
@@ -142,11 +169,11 @@ describe('Kot', () => {
             longtitude: 139.7422207,
           }
 
-          nock(Kot.baseUrl)
+          nock(baseUrl)
             .post(`/daily-workings/timerecord/${employeeKey}`)
             .reply(200, req as API.WorkingAPI.Daily.RecordResponse)
 
-          const kot = new Kot({ token })
+          const kot = new Kot({ token, baseUrl })
           const resp = await kot.working.daily.record(req)
           expect(resp).toStrictEqual(req)
         })
@@ -160,7 +187,7 @@ describe('Kot', () => {
             divisionCode: '1000',
           }
 
-          nock(Kot.baseUrl)
+          nock(baseUrl)
             .post(`/daily-workings/timerecord/${employeeKey}`)
             .reply(200, req as API.WorkingAPI.Daily.RecordResponse)
 

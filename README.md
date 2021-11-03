@@ -62,6 +62,38 @@ const client = new Kot({token: 'YOUR_ACCESS_TOKEN'})
 })()
 ```
 
+### Options
+
+The list of the options are described below:
+
+| Option      | Description                          | Type                           | Default |
+|-------------|--------------------------------------|--------------------------------|---------|
+| :----:      | :----:                               | :----:                         |         |
+| `baseURL`   | Base URL of the King of Time Web API | `https://api.kingtime.jp/v1.0` |         |
+| `timeout`   | Timeout in milliseconds.             | `1000`(`1` second)             |         |
+| `userAgent` | User Agent HTTP header value         | `KOT SDK/<RELEASE_VERSION>`    |         |
+
+Note that this can be configured in multiple ways.
+
+
+#### 1. On instance creation
+
+Pass as args as below:
+
+```typescript
+const client = new Kot({
+    baseUrl: "https://my-proxy.com"
+})
+```
+
+#### 2. With method
+
+Configure each configuration by the `Kot` classes' method `setXXX`:
+
+```typescript
+const client = new Kot().setTimeout(10000)
+```
+
 ## Author
 
 * [KeisukeYamashita](https://github.com/KeisukeYamashita)
