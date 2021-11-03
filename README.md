@@ -66,12 +66,12 @@ const client = new Kot({token: 'YOUR_ACCESS_TOKEN'})
 
 The list of the options are described below:
 
-| Option      | Description                          | Type                           | Default |
-|-------------|--------------------------------------|--------------------------------|---------|
-| :----:      | :----:                               | :----:                         |         |
-| `baseURL`   | Base URL of the King of Time Web API | `https://api.kingtime.jp/v1.0` |         |
-| `timeout`   | Timeout in milliseconds.             | `1000`(`1` second)             |         |
-| `userAgent` | User Agent HTTP header value         | `KOT SDK/<RELEASE_VERSION>`    |         |
+| Option      | Description                          | Type                                | Default          |
+|-------------|--------------------------------------|-------------------------------------|------------------|
+| `baseURL`   | Base URL of the King of Time Web API | `https://api.kingtime.jp/v1.0`      |                  |
+| `retry`     | Retry configurations                 | `axios-retry`'s `IAxiosRetryConfig` | `-` (no retries) |
+| `timeout`   | Timeout in milliseconds.             | `1000`(`1` second)                  |                  |
+| `userAgent` | User Agent HTTP header value         | `KOT SDK/<RELEASE_VERSION>`         |                  |
 
 Note that this can be configured in multiple ways.
 
