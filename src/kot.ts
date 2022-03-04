@@ -1,14 +1,12 @@
-import axios, { AxiosRequestConfig } from 'axios'
+import axios, { AxiosInstance, AxiosRequestConfig } from 'axios'
 import { Employee } from './employee'
 import { Working } from './working/working'
-import axiosRetry, { IAxiosRetryConfig } from 'axios-retry'
 
 export interface KotOptions {
   token: string
   timeout?: number
   baseUrl?: string
   userAgent?: string
-  retry?: IAxiosRetryConfig
 }
 
 /**
@@ -21,7 +19,6 @@ export class Kot {
   private _baseUrl = 'https://api.kingtime.jp/v1.0'
   private _timeout = 1000
   private _userAgent = 'KOT SDK/0.1.0'
-  private _retry?
 
   private config: AxiosRequestConfig
 
@@ -37,10 +34,6 @@ export class Kot {
     }
 
     const httpClient = axios.create(this.config)
-    if (options.retry) {
-      this._retry = options.retry
-      axiosRetry(httpClient, options.retry)
-    }
 
     this.employee = new Employee(httpClient)
     this.working = new Working(httpClient)
@@ -48,10 +41,6 @@ export class Kot {
 
   baseUrl(): string {
     return this._baseUrl
-  }
-
-  retry(): IAxiosRetryConfig | undefined {
-    return this._retry
   }
 
   timeout(): number {
@@ -71,14 +60,6 @@ export class Kot {
     }
 
     this.configureClients(config)
-    return this
-  }
-
-  setRetry(config: IAxiosRetryConfig): Kot {
-    this._retry = config
-    const httpClient = axios.create(this.config)
-    axiosRetry(httpClient, config)
-
     return this
   }
 
