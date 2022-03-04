@@ -1,4 +1,3 @@
-import { AxiosInstance } from 'axios'
 import { HttpClient } from './httpClient'
 import { API } from './interfaces'
 import util from './util'
@@ -11,10 +10,6 @@ import util from './util'
  * See detail on the official doc: {@link https://developer.kingtime.jp/#%E5%BE%93%E6%A5%AD%E5%93%A1}
  */
 export class Employee extends HttpClient {
-  constructor(httpClient: AxiosInstance) {
-    super(httpClient)
-  }
-
   /**
    * Gets a employee based on employee code.
    *

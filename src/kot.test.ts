@@ -133,30 +133,6 @@ describe('Kot', () => {
       expect(kot.userAgent()).toBe(ua)
     })
 
-    describe('setRetry', () => {
-      test('no retry on default', () => {
-        const kot = new Kot({ token })
-        expect(kot.retry()).toBe(undefined)
-      })
-
-      test('constructor', () => {
-        const retry = {
-          retries: 3,
-        }
-        const kot = new Kot({ token, retry })
-
-        expect(kot.retry()).toBe(retry)
-      })
-
-      test('configure with method', () => {
-        const retry = {
-          retries: 3,
-        }
-        const kot = new Kot({ token }).setRetry(retry)
-        expect(kot.retry()).toBe(retry)
-      })
-    })
-
     describe('list()', () => {
       test('should return results', async () => {
         nock(baseUrl)
