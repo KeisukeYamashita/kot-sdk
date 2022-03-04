@@ -32,7 +32,7 @@
   ],
   "homepage": "https://github.com/KeisukeYamashita/kot-sdk#readme",
   "dependencies": {
-    "axios": "^0.23.0"
+    "axios": "^0.26.0"
   },
   "devDependencies": {
     "@types/axios": "^0.14.0",
