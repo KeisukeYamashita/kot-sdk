@@ -55,10 +55,17 @@ export namespace API {
         longtitude?: number
       }
 
+      enum TimeRecordCode {
+        ClockIn,
+        ClockOut,
+        StartBreak,
+        EndBreak
+      }
+
       export interface RecordRequestWithCode {
         date: string
         time: string
-        code: number
+        code: TimeRecordCode
         divisionCode: string
       }
 
