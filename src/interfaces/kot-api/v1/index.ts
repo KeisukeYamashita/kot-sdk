@@ -55,7 +55,7 @@ export namespace API {
         longtitude?: number
       }
 
-      enum TimeRecordCode {
+      export enum TimeRecordCode {
         ClockIn,
         ClockOut,
         StartBreak,
