@@ -56,7 +56,7 @@ export namespace API {
       }
 
       export enum TimeRecordCode {
-        ClockIn,
+        ClockIn = 1,
         ClockOut,
         StartBreak,
         EndBreak
